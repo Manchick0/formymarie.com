@@ -1,7 +1,6 @@
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 
-import first from "../assets/sheet/first.png";
 import second from "../assets/sheet/second.png";
 import third from "../assets/sheet/third.png";
 import fourth from "../assets/sheet/fourth.png";
@@ -17,31 +16,17 @@ window.addEventListener("load", () => {
     timeline
         .to(background, {
             duration: 0.25,
-            attr: {
-                src: first,
-            },
+            onComplete: () => (background.src = second),
         })
         .to(background, {
             duration: 0.25,
-            attr: {
-                src: second,
-            },
+            onComplete: () => (background.src = third),
         })
         .to(background, {
             duration: 0.25,
-            attr: {
-                src: third,
-            },
+            onComplete: () => (background.src = fourth),
         })
-        .to(background, {
-            duration: 0.25,
-            attr: {
-                src: fourth,
-            },
-        })
-        .set(content, {
-            display: "flex",
-        })
+        .set(content, { display: "flex" })
         .from(split.chars, {
             duration: 0.05,
             opacity: 0,
