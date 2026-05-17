@@ -1,9 +1,8 @@
 :root {
-    --background-color: #0f0f0f;
-    background-color: var(--background-color);
+    background-color: #0f0f0f;
     font-family: "Great Vibes", cursive;
+    font-size: 2rem;
     color: #cfcfcf;
-    font-size: 1.75rem;
 }
 
 body {
@@ -79,19 +78,6 @@ body {
     padding: 1rem;
 }
 
-.epilogue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-    width: 80%;
-}
-
-.rose {
-    width: 100%;
-    height: auto;
-}
-
 .entry-image {
     position: absolute;
     top: 50%;
@@ -110,4 +96,12 @@ body {
 
 .entry.right > .entry-image {
     left: 100%;
+}
+
+.epilogue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 1.5rem;
 }
