@@ -3,7 +3,7 @@
     background-color: var(--background-color);
     font-family: "Great Vibes", cursive;
     color: #cfcfcf;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 body {
@@ -11,7 +11,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
     margin: 0;
     gap: 2rem;
 }
@@ -20,24 +19,47 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 4rem;
     height: 100vh;
+    width: 100%;
 }
 
 .letter {
-    height: 80%;
-    width: 80%;
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    padding: 30% 15%;
-    box-sizing: content-box;
+    position: relative;
+    display: flex;
+    height: 100%;
+    aspect-ratio: 3/4;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    @media (orientation: portrait) {
+        width: 100%;
+        height: unset;
+    }
+}
+
+.letter-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0;
+}
+
+.letter-content {
+    height: 70%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: #2f1f2f;
+    font-size: clamp(0.5rem, 4vw, 1rem);
 }
 
 .gallery {
     display: flex;
-    width: min(50%, 80vw);
+    width: 30%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -53,7 +75,24 @@ body {
     padding: 1rem;
 }
 
-.entry img {
+.epilogue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.rose {
+    width: 100%;
+    height: auto;
+}
+
+.entry-description {
+    display: block;
+    text-align: left;
+}
+
+.entry-image {
     position: absolute;
     top: 50%;
     translate: 0 -50%;
@@ -61,10 +100,10 @@ body {
     height: auto;
 }
 
-.entry.left img {
+.entry.left > .entry-image {
     right: 100%;
 }
 
-.entry.right img {
+.entry.right > .entry-image {
     left: 100%;
 }

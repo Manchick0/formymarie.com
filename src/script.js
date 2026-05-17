@@ -8,24 +8,34 @@ import fourth from "../assets/sheet/fourth.png";
 
 gsap.registerPlugin(SplitText);
 const letter = document.querySelector(".letter");
+const background = document.querySelector(".letter-background");
 const content = new SplitText(letter, { type: "chars" });
 const timeline = gsap.timeline();
 
 timeline
-    .set(letter, {
-        backgroundImage: `url(${first})`,
+    .to(background, {
+        duration: 0.25,
+        attr: {
+            src: first,
+        },
     })
-    .to(letter, {
-        duration: 0.5,
-        onComplete: () => (letter.style.backgroundImage = `url(${second})`),
+    .to(background, {
+        duration: 0.25,
+        attr: {
+            src: second,
+        },
     })
-    .to(letter, {
-        duration: 0.5,
-        onComplete: () => (letter.style.backgroundImage = `url(${third})`),
+    .to(background, {
+        duration: 0.25,
+        attr: {
+            src: third,
+        },
     })
-    .to(letter, {
-        duration: 0.5,
-        onComplete: () => (letter.style.backgroundImage = `url(${fourth})`),
+    .to(background, {
+        duration: 0.25,
+        attr: {
+            src: fourth,
+        },
     })
     .from(content.chars, {
         duration: 0.05,
