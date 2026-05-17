@@ -27,7 +27,7 @@ body {
 .letter {
     height: 80%;
     width: 80%;
-    background-image: url("assets/sheets/first.png");
+    background-image: none;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -37,7 +37,7 @@ body {
 
 .gallery {
     display: flex;
-    width: 50%;
+    width: min(50%, 80vw);
     flex-direction: column;
     justify-content: center;
     align-items: center;
