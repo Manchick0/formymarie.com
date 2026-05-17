@@ -7,38 +7,44 @@ import third from "../assets/sheet/third.png";
 import fourth from "../assets/sheet/fourth.png";
 
 gsap.registerPlugin(SplitText);
-const letter = document.querySelector(".letter");
-const background = document.querySelector(".letter-background");
-const content = new SplitText(letter, { type: "chars" });
-const timeline = gsap.timeline();
 
-timeline
-    .to(background, {
-        duration: 0.25,
-        attr: {
-            src: first,
-        },
-    })
-    .to(background, {
-        duration: 0.25,
-        attr: {
-            src: second,
-        },
-    })
-    .to(background, {
-        duration: 0.25,
-        attr: {
-            src: third,
-        },
-    })
-    .to(background, {
-        duration: 0.25,
-        attr: {
-            src: fourth,
-        },
-    })
-    .from(content.chars, {
-        duration: 0.05,
-        opacity: 0,
-        stagger: 0.1,
-    });
+const background = document.querySelector(".letter-background");
+const content = document.querySelector(".letter-content");
+const split = new SplitText(content, { type: "chars", smartWrap: true });
+
+window.addEventListener("load", () => {
+    const timeline = gsap.timeline();
+    timeline
+        .to(background, {
+            duration: 0.25,
+            attr: {
+                src: first,
+            },
+        })
+        .to(background, {
+            duration: 0.25,
+            attr: {
+                src: second,
+            },
+        })
+        .to(background, {
+            duration: 0.25,
+            attr: {
+                src: third,
+            },
+        })
+        .to(background, {
+            duration: 0.25,
+            attr: {
+                src: fourth,
+            },
+        })
+        .set(content, {
+            display: "flex",
+        })
+        .from(split.chars, {
+            duration: 0.05,
+            opacity: 0,
+            stagger: 0.1,
+        });
+});

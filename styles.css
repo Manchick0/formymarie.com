@@ -48,7 +48,7 @@ body {
 .letter-content {
     height: 70%;
     width: 65%;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: start;
