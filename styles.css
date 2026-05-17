@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    gap: 2rem;
+    gap: 5rem;
 }
 
 .segment {
@@ -54,7 +54,11 @@ body {
     justify-content: center;
     align-items: start;
     color: #2f1f2f;
-    font-size: clamp(0.5rem, 4vw, 1rem);
+    font-size: 3cqh;
+
+    @media (orientation: portrait) {
+        font-size: 4cqw;
+    }
 }
 
 .gallery {
@@ -79,6 +83,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
     width: 80%;
 }
 
@@ -87,17 +92,16 @@ body {
     height: auto;
 }
 
-.entry-description {
-    display: block;
-    text-align: left;
-}
-
 .entry-image {
     position: absolute;
     top: 50%;
     translate: 0 -50%;
     width: 50%;
     height: auto;
+
+    @media (orientation: portrait) {
+        width: 70%;
+    }
 }
 
 .entry.left > .entry-image {
