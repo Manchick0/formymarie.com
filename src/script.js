@@ -7,25 +7,25 @@ import third from "../assets/sheet/third.png";
 import fourth from "../assets/sheet/fourth.png";
 
 gsap.registerPlugin(SplitText);
-const content = new SplitText(".letter", { type: "chars" });
+const letter = document.querySelector(".letter");
+const content = new SplitText(letter, { type: "chars" });
 const timeline = gsap.timeline();
 
 timeline
-    .from(".letter", {
-        duration: 0.5,
-        backgroundImage: () => `url(${first})`,
+    .set(letter, {
+        backgroundImage: `url(${first})`,
     })
-    .to(".letter", {
+    .to(letter, {
         duration: 0.5,
-        backgroundImage: () => `url(${second})`,
+        onComplete: () => (letter.style.backgroundImage = `url(${second})`),
     })
-    .to(".letter", {
+    .to(letter, {
         duration: 0.5,
-        backgroundImage: () => `url(${third})`,
+        onComplete: () => (letter.style.backgroundImage = `url(${third})`),
     })
-    .to(".letter", {
+    .to(letter, {
         duration: 0.5,
-        backgroundImage: () => `url(${fourth})`,
+        onComplete: () => (letter.style.backgroundImage = `url(${fourth})`),
     })
     .from(content.chars, {
         duration: 0.05,
