@@ -7,6 +7,7 @@
 
 body {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -48,9 +49,10 @@ body {
 .letter-content {
     height: 70%;
     width: 65%;
+    margin-top: 2rem;
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     color: #2f1f2f;
     font-size: 3cqh;
@@ -98,10 +100,109 @@ body {
     left: 100%;
 }
 
+.calendar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: 40%;
+    gap: 1rem;
+
+    @media (orientation: portrait) {
+        width: 70%;
+    }
+}
+
+.calendar::-webkit-scrollbar {
+    display: none;
+}
+
+.calendar-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    scroll-snap-align: center;
+    align-items: center;
+    min-width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.calendar-month {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.month-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.calendar-entry {
+    --background-color: #af2f3f;
+    --hover-color: #df4f5f;
+
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    font-size: 0.75rem;
+    background-color: var(--background-color);
+    transition: background-color 250ms;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    width: 1.5rem;
+    aspect-ratio: 1;
+}
+
+.calendar-entry.inactive {
+    --background-color: #2f1f1f;
+    --hover-color: unset;
+    color: #5f5f5f;
+    cursor: auto;
+}
+
+.calendar-entry:hover,
+.calendar-entry:active {
+    background-color: var(--hover-color, var(--background-color));
+}
+
+.calendar-scroller {
+    position: fixed;
+    user-select: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: #4f1f2f;
+    transition: background-color 250ms;
+    border-radius: 0.5rem;
+    font-size: 3cqh;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.calendar-scroller:hover,
+.calendar-scroller:active {
+    background-color: #6f2f3f;
+}
+
 .epilogue {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 5rem;
     font-size: 1.5rem;
+}
+
+.letter-heading {
+    font-weight: 600;
+    line-height: 1.5lh;
 }

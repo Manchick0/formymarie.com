@@ -7,29 +7,91 @@ import fourth from "../assets/sheet/fourth.png";
 
 gsap.registerPlugin(SplitText);
 
-const background = document.querySelector(".letter-background");
-const content = document.querySelector(".letter-content");
-const split = new SplitText(content, { type: "chars", smartWrap: true });
+class Letter {
+    static self = document.querySelector(".letter-content");
+    static background = document.querySelector(".letter-background");
 
-window.addEventListener("load", () => {
-    const timeline = gsap.timeline();
-    timeline
-        .to(background, {
-            duration: 0.25,
-            onComplete: () => (background.src = second),
-        })
-        .to(background, {
-            duration: 0.25,
-            onComplete: () => (background.src = third),
-        })
-        .to(background, {
-            duration: 0.25,
-            onComplete: () => (background.src = fourth),
-        })
-        .set(content, { display: "flex" })
-        .from(split.chars, {
-            duration: 0.05,
-            opacity: 0,
-            stagger: 0.1,
-        });
-});
+    #split;
+
+    initializeTemplate(identifier) {
+        const template = document.querySelector(`.${CSS.escape(identifier)}`);
+        if (template) {
+            if (this.#split) this.#split.revert();
+            const content = template.content.cloneNode(true);
+            Letter.self.replaceChildren(content);
+            this.#split = SplitText.create(Letter.self, {
+                type: "chars",
+                smartWrap: true,
+            });
+            const timeline = gsap.timeline();
+            timeline
+                .to(Letter.background, {
+                    duration: 0.25,
+                    onComplete: () => (Letter.background.src = second),
+                })
+                .to(Letter.background, {
+                    duration: 0.25,
+                    onComplete: () => (Letter.background.src = third),
+                })
+                .to(Letter.background, {
+                    duration: 0.25,
+                    onComplete: () => (Letter.background.src = fourth),
+                })
+                .set(Letter.self, { display: "flex" })
+                .from(this.#split.chars, {
+                    duration: 0.05,
+                    opacity: 0,
+                    stagger: 0.1,
+                });
+            console.log(
+                `Successfully initialized the template '${identifier}'`,
+            );
+            return;
+        }
+        console.error(
+            `Attempted to display an unrecognized template '${identifier}'.`,
+        );
+    }
+}
+
+class Calendar {
+    static self = document.querySelector(".calendar");
+
+    inititalizeEntries() {
+        const entries = Calendar.self.querySelectorAll(".calendar-entry");
+        for (const entry of entries) {
+            const template = entry.getAttribute("data-template");
+            if (template) {
+                entry.onclick = () => {
+                    letter.initializeTemplate(template);
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                };
+                continue;
+            }
+            entry.classList.add("inactive");
+        }
+        console.log("Successfully initalized the calendar entries!");
+    }
+
+    inititalizeQuickScroll() {
+        const scroller = document.querySelector(".calendar-scroller");
+        scroller.onclick = () => {
+            Calendar.self.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        };
+        console.log("Successfully initalized the quick scroll!");
+    }
+}
+
+const letter = new Letter();
+const calendar = new Calendar();
+
+window.addEventListener("load", () => letter.initializeTemplate("greeting"));
+calendar.inititalizeEntries();
+calendar.inititalizeQuickScroll();
