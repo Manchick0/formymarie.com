@@ -180,8 +180,9 @@ body {
     user-select: none;
     cursor: pointer;
     padding: 0.5rem;
-    width: 2rem;
     aspect-ratio: 1;
+    font-size: 3cqh;
+    font-family: monospace;
     background-color: #4f1f2f;
     transition: background-color 250ms;
     border-radius: 0.5rem;
