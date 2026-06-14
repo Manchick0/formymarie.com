@@ -50,10 +50,9 @@ class Letter {
                 });
                 if (
                     content === "." ||
-                    content == "?" ||
-                    content == "!" ||
-                    content == ":" ||
-                    content == ";"
+                    content === "?" ||
+                    content === "!" ||
+                    content === ";"
                 ) {
                     timeline.from({}, { duration: 0.5 });
                     continue;
