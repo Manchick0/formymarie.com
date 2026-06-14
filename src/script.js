@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 
+import first from "../assets/sheet/first.png";
 import second from "../assets/sheet/second.png";
 import third from "../assets/sheet/third.png";
 import fourth from "../assets/sheet/fourth.png";
@@ -19,6 +20,7 @@ class Letter {
             if (this.#split) this.#split.revert();
             const content = template.content.cloneNode(true);
             Letter.self.replaceChildren(content);
+            Letter.background.src = first;
             this.#split = SplitText.create(Letter.self, {
                 type: "chars",
                 smartWrap: true,
@@ -37,12 +39,30 @@ class Letter {
                     duration: 0.25,
                     onComplete: () => (Letter.background.src = fourth),
                 })
-                .set(Letter.self, { display: "flex" })
-                .from(this.#split.chars, {
-                    duration: 0.05,
+                .set(Letter.self, { display: "flex" });
+            for (let i = 0; i < this.#split.chars.length; i++) {
+                const element = this.#split.chars[i];
+                const content = element.innerText;
+                timeline.from(element, {
+                    duration: 0.1,
                     opacity: 0,
-                    stagger: 0.1,
+                    y: `+=${Math.floor(Math.random() * 5) + 2}`,
                 });
+                if (
+                    content === "." ||
+                    content == "?" ||
+                    content == "!" ||
+                    content == ":" ||
+                    content == ";"
+                ) {
+                    timeline.from({}, { duration: 0.5 });
+                    continue;
+                }
+                if (content === "," || content === "—") {
+                    timeline.from({}, { duration: 0.1 });
+                    continue;
+                }
+            }
             console.log(
                 `Successfully initialized the template '${identifier}'`,
             );
