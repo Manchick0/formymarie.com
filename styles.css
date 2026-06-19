@@ -167,6 +167,12 @@ body {
     cursor: auto;
 }
 
+.calendar-entry.delayed {
+    --background-color: #d39230;
+    --hover-color: #e6ab53;
+    color: #0f0f0f;
+}
+
 .calendar-entry:hover,
 .calendar-entry:active {
     background-color: var(--hover-color, var(--background-color));

@@ -15,7 +15,9 @@ class Letter {
     #split;
 
     initializeTemplate(identifier) {
-        const template = document.querySelector(`.${CSS.escape(identifier)}`);
+        const template = document.querySelector(
+            `template.${CSS.escape(identifier)}`,
+        );
         if (template) {
             if (this.#split) this.#split.revert();
             const content = template.content.cloneNode(true);
@@ -80,6 +82,19 @@ class Calendar {
         const entries = Calendar.self.querySelectorAll(".calendar-entry");
         for (const entry of entries) {
             const template = entry.getAttribute("data-template");
+            const delayed = entry.hasAttribute("data-delayed");
+            if (delayed) {
+                entry.onclick = () => {
+                    letter.initializeTemplate("delayed");
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                };
+                entry.classList.add("delayed");
+                continue;
+            }
             if (template) {
                 entry.onclick = () => {
                     letter.initializeTemplate(template);
