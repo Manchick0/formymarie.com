@@ -111,13 +111,22 @@ class Calendar {
             const template = entry.getAttribute("data-template");
             const delayed = entry.hasAttribute("data-delayed");
             if (delayed) {
-                entry.addEventListener("click", () => {
-                    letter.initializeTemplate("delayed");
-                    window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: "smooth",
+                const shake = gsap
+                    .timeline({ paused: true })
+                    .to(entry, {
+                        x: `+=8`,
+                        duration: 0.2,
+                    })
+                    .to(entry, {
+                        x: `-=16`,
+                        duration: 0.2,
+                    })
+                    .to(entry, {
+                        x: `+=8`,
+                        duration: 0.2,
                     });
+                entry.addEventListener("click", () => {
+                    shake.restart();
                 });
                 entry.classList.add("delayed");
                 continue;
