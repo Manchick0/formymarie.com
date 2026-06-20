@@ -146,6 +146,7 @@ body {
     --hover-color: #df4f5f;
 
     display: flex;
+    position: relative;
     user-select: none;
     cursor: pointer;
     justify-content: center;
@@ -170,6 +171,12 @@ body {
 .calendar-entry.delayed {
     --background-color: #d39230;
     --hover-color: #e6ab53;
+    color: #0f0f0f;
+}
+
+.calendar-entry.interactive {
+    --background-color: #599635;
+    --hover-color: #89b13f;
     color: #0f0f0f;
 }
 
@@ -219,4 +226,30 @@ body {
 .letter-heading {
     font-weight: 600;
     line-height: 1.5lh;
+}
+
+.tableau {
+    color: #4f2f3f;
+    font-family: monospace;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.cookie {
+    width: 60%;
+    filter: grayscale(100%);
+    user-select: none;
+    transition:
+        filter 200ms,
+        translate 200ms;
+
+    &:active,
+    &:hover {
+        cursor: pointer;
+        filter: unset;
+    }
+
+    &:active {
+        translate: 0px 20px;
+    }
 }
